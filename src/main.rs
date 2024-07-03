@@ -13,7 +13,7 @@ use clap::{Arg, ArgAction, Command};
 
 use svd2rust::{
     config::{Config, SourceType, Target},
-    generate, load_from,
+    generate, load_from, generate_c,
     util::{self, build_rs},
 };
 
@@ -331,7 +331,7 @@ Ignore this option if you are not building your own FPGA based soft-cores."),
 
     let mut device_x = String::new();
     info!("Rendering device");
-    let items = generate::device::render(&device, &config, &mut device_x)
+    let items = generate_c::device::render(&device, &config, &mut device_x)
         .with_context(|| "Error rendering device")?;
 
     let filename = if config.make_mod { "mod.rs" } else { "lib.rs" };

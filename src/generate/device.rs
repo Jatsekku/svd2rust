@@ -319,3 +319,25 @@ pub fn render(d: &Device, config: &Config, device_x: &mut String) -> Result<Toke
 
     Ok(out)
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+pub fn render_peripheral(p: &Peripheral, config: &Config) -> Result<String> {
+    match &p {
+        Peripheral::Array(pi,_) => { 
+            println!("Array\n")
+        },
+
+        Peripheral::Single(pi) => {
+            println!("{}", &pi.name) 
+        }
+    }
+
+    Ok("S".to_string())
+}
+
+pub fn render_device(d: &Device, config: &Config, device_x: &mut String) -> Result<String> {
+    for p in &d.peripherals {
+        render_peripheral(p, config);
+    }
+    Ok("S".to_string())
+} 
