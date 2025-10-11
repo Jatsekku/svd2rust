@@ -591,6 +591,7 @@ use svd_parser::svd;
 
 pub mod config;
 pub mod generate;
+pub mod generate_c;
 pub mod util;
 
 pub use config::{Config, Target};

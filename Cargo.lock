@@ -1229,6 +1229,7 @@ dependencies = [
  "inflections",
  "irx-config",
  "log",
+ "once_cell",
  "proc-macro2",
  "quote",
  "regex",

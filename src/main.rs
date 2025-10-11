@@ -13,7 +13,7 @@ use clap::{Arg, ArgAction, Command};
 
 use svd2rust::{
     config::{Config, SourceType, Target},
-    generate, load_from,
+    generate, generate_c, load_from,
     util::{self, build_rs},
 };
 
@@ -333,6 +333,9 @@ Ignore this option if you are not building your own FPGA based soft-cores."),
     info!("Rendering device");
     let items = generate::device::render(&device, &config, &mut device_x)
         .with_context(|| "Error rendering device")?;
+
+    let index = svd_parser::expand::Index::create(&device);
+    print!("{}\n", generate_c::peripheral::render(&device.peripherals, &index).unwrap());
 
     let filename = if config.make_mod { "mod.rs" } else { "lib.rs" };
     let mut file = File::create(path.join(filename)).expect("Couldn't create output file");
